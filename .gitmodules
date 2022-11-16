@@ -1,0 +1,24 @@
+[submodule "api_healthcheck"]
+	path = api_healthcheck
+	url = https://github.com/corespace-api/api_healthcheck
+[submodule "api_login"]
+	path = api_login
+	url = https://github.com/corespace-api/api_login.git
+[submodule "api_media"]
+	path = api_media
+	url = https://github.com/corespace-api/api_media.git
+[submodule "api_notification"]
+	path = api_notification
+	url = https://github.com/corespace-api/api_notification.git
+[submodule "api_register"]
+	path = api_register
+	url = https://github.com/corespace-api/api_register.git
+[submodule "api_token"]
+	path = api_token
+	url = https://github.com/corespace-api/api_token.git
+[submodule "api_userdata"]
+	path = api_userdata
+	url = https://github.com/corespace-api/api_userdata.git
+[submodule "api_testing"]
+	path = api_testing
+	url = https://github.com/corespace-api/api_testing.git
