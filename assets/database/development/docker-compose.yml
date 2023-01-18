@@ -35,6 +35,8 @@ services:
             - mongodb
         ports:
             - 3001:3001
+        volumes:
+            - C:\Users\AsP3X\Desktop\corespace_testing\ms-register:/service/logs
         environment:
             MONGO_URL: mongodb
             MONGO_PORT: 27017
@@ -51,6 +53,9 @@ services:
             - mongodb
         ports:
             - 3002:3002
+        volumes:
+            - C:\Users\AsP3X\Desktop\corespace_testing\ms-login\logging:/service/logs
+            - C:\Users\AsP3X\Desktop\corespace_testing\ms-login\.env:/service/.env
         environment:
             MONGO_URL: mongodb
             MONGO_PORT: 27017
