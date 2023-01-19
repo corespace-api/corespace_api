@@ -1,0 +1,15 @@
+{
+  "editor.tabSize": 2,
+  "terminal.integrated.defaultLocation": "editor",
+  "restoreTerminals.terminals": [{
+      "splitTerminals": [{
+        "name": "Image Builder"
+      }]
+    },
+    {
+      "splitTerminals": [{
+        "name": "Terminal"
+      }]
+    }
+  ],
+}
