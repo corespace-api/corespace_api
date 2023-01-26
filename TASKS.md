@@ -1,0 +1,1 @@
+Minify code via moving code snippets used in other scripts to a module (service/assets/.*.)

@@ -58,5 +58,5 @@ services:
       - MONGO_USER=corespace
       - MONGO_PASSWORD=masterpassword
       - MONGO_DB=corespace
-      - ALLOW_DEBUG=false
+      - ALLOW_DEBUG=true
       - PORT=3002
