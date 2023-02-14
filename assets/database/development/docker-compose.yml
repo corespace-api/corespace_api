@@ -40,20 +40,30 @@ services:
       - MONGO_DB=corespace
       - ALLOW_DEBUG=true
       - PORT=3001
-    
-  # ms-login:
-  #   image: ms-login:v1.0.0
-  #   container_name: ms-login
-  #   restart: always
-  #   depends_on:
-  #     - mongodb
-  #   ports:
-  #     - 3002:3002
-  #   environment:
-  #     - MONGO_URL=mongodb
-  #     - MONGO_PORT=27017
-  #     - MONGO_USER=corespace
-  #     - MONGO_PASSWORD=masterpassword
-  #     - MONGO_DB=corespace
-  #     - ALLOW_DEBUG=true
-  #     - PORT=3002
+
+  ms-login:
+    image: zombymediaic/ms-corespace:login-1.0.0
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URL=mongodb
+      - MONGO_PORT=27017
+      - MONGO_USER=corespace
+      - MONGO_PASSWORD=masterpassword
+      - MONGO_DB=corespace
+      - ALLOW_DEBUG=true
+      - PORT=3001
+
+  ms-service-handler:
+    image: zombymediaic/ms-corespace:service-handler-1.0.0
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URL=mongodb
+      - MONGO_PORT=27017
+      - MONGO_USER=corespace
+      - MONGO_PASSWORD=masterpassword
+      - MONGO_DB=corespace
+      - ALLOW_DEBUG=true
