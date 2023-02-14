@@ -14,3 +14,7 @@
 	path = api_token
 	url = https://github.com/corespace-api/api_token.git
 	branch = development
+[submodule "service_handler"]
+	path = service_handler
+	url = https://github.com/corespace-api/service_handler.git
+	branch = development
