@@ -44,7 +44,7 @@ services:
       - PORT=3001
 
   ms-login:
-    image: zombymediaic/ms-corespace:login-1.0.0
+    image: zombymediaic/ms-corespace:login-1.1.0
     restart: always
     depends_on:
       - mongodb
@@ -60,7 +60,7 @@ services:
       - PORT=3002
 
   ms-service-handler:
-    image: zombymediaic/ms-corespace:service-handler-1.0.0
+    image: zombymediaic/ms-corespace:service-handler-1.1.0
     restart: always
     depends_on:
       - mongodb
