@@ -50,6 +50,20 @@
       ]
     },
     {
+      "label": "Build API Token",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/api_token"
+      },
+      "command": "docker",
+      "args": [
+        "build",
+        "-t",
+        "zombymediaic/ms-corespace:token-1.1.0",
+        "."
+      ]
+    },
+    {
       "label": "Build API Service Manager",
       "type": "shell",
       "options": {
