@@ -1,0 +1,67 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Remove old Docker Images",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "images",
+        "zombymediaic/ms-corespace",
+        "-q",
+        "|",
+        "ForEach-Object",
+        "{",
+        "docker",
+        "rmi",
+        "-f",
+        "$_",
+        "}",
+      ]
+    },
+    {
+      "label": "Build API Register",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/api_register"
+      },
+      "command": "docker",
+      "args": [
+        "build",
+        "-t",
+        "zombymediaic/ms-corespace:register-1.1.0",
+        "."
+      ]
+    },
+    {
+      "label": "Build API Login",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/api_login"
+      },
+      "command": "docker",
+      "args": [
+        "build",
+        "-t",
+        "zombymediaic/ms-corespace:login-1.1.0",
+        "."
+      ]
+    },
+    {
+      "label": "Build API Service Manager",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/service_handler"
+      },
+      "command": "docker",
+      "args": [
+        "build",
+        "-t",
+        "zombymediaic/ms-corespace:service-handler-1.1.0",
+        "."
+      ]
+    }
+  ]
+}
