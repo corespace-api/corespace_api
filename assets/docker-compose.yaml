@@ -13,7 +13,6 @@ services:
       - 27017:27017
     volumes:
       - ./database/development/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-      - ./database/development/data:/data/db
 
   mongodb-express:
     image: mongo-express:latest
@@ -22,11 +21,31 @@ services:
     depends_on:
       - mongodb
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin_password
       - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=admin
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=admin_password
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin
     ports:
       - 8081:8081
+
+  ms-service-handler:
+    image: zombymediaic/ms-corespace:service-handler-1.1.0
+    restart: always
+    volumes:
+      - ./container/service-handler/config.json:/service/config.json:ro
+    depends_on:
+      - mongodb-express
+    environment:
+      - MONGO_URL=mongodb
+      - MONGO_PORT=27017
+      - MONGO_USER=corespace
+      - MONGO_PASSWORD=masterpassword
+      - MONGO_DB=corespace
+      - ALLOW_DEBUG=true
 
   ms-register:
     image: zombymediaic/ms-corespace:register-1.1.0
@@ -34,7 +53,7 @@ services:
     volumes:
       - ./container/register/config.json:/service/config.json:ro
     depends_on:
-      - mongodb
+      - ms-service-handler
     ports:
       - 3001:3001
     environment:
@@ -52,7 +71,7 @@ services:
     volumes:
       - ./container/login/config.json:/service/config.json:ro
     depends_on:
-      - mongodb
+      - ms-service-handler
     ports:
       - 3002:3002
     environment:
@@ -63,18 +82,3 @@ services:
       - MONGO_DB=corespace
       - ALLOW_DEBUG=true
       - PORT=3002
-
-  ms-service-handler:
-    image: zombymediaic/ms-corespace:service-handler-1.1.0
-    restart: always
-    volumes:
-      - ./container/service-handler/config.json:/service/config.json:ro
-    depends_on:
-      - mongodb
-    environment:
-      - MONGO_URL=mongodb
-      - MONGO_PORT=27017
-      - MONGO_USER=corespace
-      - MONGO_PASSWORD=masterpassword
-      - MONGO_DB=corespace
-      - ALLOW_DEBUG=true
