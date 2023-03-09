@@ -1,0 +1,15 @@
+{
+  "name": "api_service_handler",
+  "description": "API Service Handler",
+  "version": "1.1.0",
+  "author": "AsP3X",
+  "license": "MIT",
+  "port": 3000,
+  "mongodb": {
+    "MONGO_URL": "mongodb",
+    "MONGO_PORT": "27017",
+    "MONGO_USER": "corespace",
+    "MONGO_PASSWORD": "masterpassword",
+    "MONGO_DB": "corespace"
+  }
+}
