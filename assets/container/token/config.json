@@ -1,6 +1,6 @@
 {
-  "name": "login",
-  "description": "API Login",
+  "name": "token",
+  "description": "API Token",
   "version": "1.1.0",
   "author": "AsP3X",
   "license": "MIT",

@@ -1,5 +1,5 @@
 {
-  "name": "api_register",
+  "name": "register",
   "description": "API Register",
   "version": "1.1.0",
   "author": "AsP3X",
@@ -12,5 +12,6 @@
     "MONGO_PASSWORD": "masterpassword",
     "MONGO_DB": "corespace"
   },
+  "domain": "http://localhost",
   "route_path": "/service/routes"
 }
