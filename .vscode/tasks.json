@@ -62,6 +62,18 @@
         "zombymediaic/ms-corespace:service-handler-1.1.0",
         "."
       ]
+    },
+    {
+      "label": "Start Docker Compose",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/assets"
+      },
+      "command": "docker-compose",
+      "args": [
+        "up",
+        "-d"
+      ]
     }
   ]
 }
