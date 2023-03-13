@@ -78,6 +78,20 @@
       ]
     },
     {
+      "label": "Build API Proxy",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/assets/nginx"
+      },
+      "command": "docker",
+      "args": [
+        "build",
+        "-t",
+        "zombymediaic/ms-corespace:reverseproxy-1.1.0",
+        "."
+      ]
+    },
+    {
       "label": "Start Docker Compose",
       "type": "shell",
       "options": {

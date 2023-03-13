@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  ms-nginx-proxy:
+    image: zombymediaic/ms-corespace:reverseproxy-1.1.0
+    container_name: ms-nginx-proxy
+    volumes:
+      - ./container/reverseproxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: always
+    ports:
+      - 80:80
+
   mongodb:
     image: mongo:latest
     container_name: mongodb
@@ -9,6 +18,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin_password
       - MONGO_INITDB_DATABASE=corespace
+    depends_on:
+      - ms-nginx-proxy
     ports:
       - 27017:27017
     volumes:
@@ -19,7 +30,7 @@ services:
     container_name: mongodb-express
     restart: always
     depends_on:
-      - mongodb
+      - ms-nginx-proxy
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongodb
       - ME_CONFIG_MONGODB_PORT=27017
@@ -38,14 +49,7 @@ services:
     volumes:
       - ./container/service-handler/config.json:/service/config.json:ro
     depends_on:
-      - mongodb-express
-    environment:
-      - MONGO_URL=mongodb
-      - MONGO_PORT=27017
-      - MONGO_USER=corespace
-      - MONGO_PASSWORD=masterpassword
-      - MONGO_DB=corespace
-      - ALLOW_DEBUG=true
+      - ms-nginx-proxy
 
   ms-register:
     image: zombymediaic/ms-corespace:register-1.1.0
@@ -53,47 +57,22 @@ services:
     volumes:
       - ./container/register/config.json:/service/config.json:ro
     depends_on:
-      - ms-service-handler
-    ports:
-      - 3001:3000
-    environment:
-      - MONGO_URL=mongodb
-      - MONGO_PORT=27017
-      - MONGO_USER=corespace
-      - MONGO_PASSWORD=masterpassword
-      - MONGO_DB=corespace
-      - ALLOW_DEBUG=true
+      - ms-nginx-proxy
 
   ms-login:
     image: zombymediaic/ms-corespace:login-1.1.0
     restart: always
+    hostname: ms-login
     volumes:
       - ./container/login/config.json:/service/config.json:ro
     depends_on:
-      - ms-service-handler
-    ports:
-      - 3002:3000
-    environment:
-      - MONGO_URL=mongodb
-      - MONGO_PORT=27017
-      - MONGO_USER=corespace
-      - MONGO_PASSWORD=masterpassword
-      - MONGO_DB=corespace
-      - ALLOW_DEBUG=true
+      - ms-nginx-proxy
 
   ms-token:
     image: zombymediaic/ms-corespace:token-1.1.0
     restart: always
+    hostname: ms-token
     volumes:
       - ./container/token/config.json:/service/config.json:ro
     depends_on:
-      - ms-service-handler
-    ports:
-      - 3003:3000
-    environment:
-      - MONGO_URL=mongodb
-      - MONGO_PORT=27017
-      - MONGO_USER=corespace
-      - MONGO_PASSWORD=masterpassword
-      - MONGO_DB=corespace
-      - ALLOW_DEBUG=true
+      - ms-nginx-proxy
